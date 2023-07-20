@@ -12,14 +12,14 @@ namespace ViteDotnet.Controllers
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IWebHostEnvironment _env;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IWebHostEnvironment env )
         {
-            _logger = logger;
+            _env = env;
         }
 
-        [HttpGet]
+     /*   [HttpGet("GetWeather")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -29,6 +29,18 @@ namespace ViteDotnet.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }*/
+
+        [HttpGet("GetEnv")]
+        public ActionResult<HostingStuff> GetEnv()
+        {
+
+            return new HostingStuff() { HostName = _env.EnvironmentName };
+        }
+
+        public class HostingStuff
+        {
+            public string HostName { get; set; }
         }
     }
 }

@@ -3,22 +3,22 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-type data = {
-  data: string;
-};
+type HostingStuff = {
+    hostName: string;
+    }
 
 function App() {
   const [count, setCount] = useState(0);
 
-  console.log(import.meta.env.VITE_API_BASE_URL);
+    console.log(`Vite Env: ${import.meta.env.VITE_ENV_NAME}`);
 
   useEffect(() => {
     async function getData() {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL as string}/api/WeatherForecast`
+          `${import.meta.env.VITE_API_BASE_URL as string}/api/WeatherForecast/GetEnv`
       );
-      const data = (await res.json()) as data;
-      console.log(data);
+        const data = await res.json() as HostingStuff;
+        console.log(`DotNet Env: ${data.hostName}`);
     }
 
     void getData();

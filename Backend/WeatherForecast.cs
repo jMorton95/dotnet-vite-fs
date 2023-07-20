@@ -10,4 +10,9 @@ namespace ViteDotnet.Backend
 
         public string? Summary { get; set; }
     }
+
+    public class Settings
+    {
+        public string Configuration { get; set; }
+    }
 }

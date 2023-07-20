@@ -1,8 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.WebHost.ConfigureAppConfiguration((context, config) =>
+{
+    Console.WriteLine(context.HostingEnvironment.EnvironmentName);
+    config.AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}", true, true);
+});
 
-builder.Services.AddControllersWithViews();
+
+var settings = builder.Configuration.GetSection("Settings");
+
+//Console.WriteLine(settings.ToString());
+//builder.Configuration.GetSection("Settings").Bind(new Settings());
 
 builder.Services.AddCors(options =>
 {
@@ -16,6 +24,8 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,7 +35,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-Console.WriteLine($"{app.Environment.EnvironmentName} Writeline");
+//Console.WriteLine($"{app.Environment.EnvironmentName} Writeline");
 
 
 app.UseCors("AllowAll");

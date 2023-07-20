@@ -26,8 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Development.pubxml" />
-    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Production.pubxml" />
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Local.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
