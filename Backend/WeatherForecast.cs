@@ -1,4 +1,4 @@
-namespace ViteDotnet
+namespace ViteDotnet.Backend
 {
     public class WeatherForecast
     {
