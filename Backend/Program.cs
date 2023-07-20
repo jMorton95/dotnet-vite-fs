@@ -1,16 +1,21 @@
-var builder = WebApplication.CreateBuilder(args);
-
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+/*
 builder.WebHost.ConfigureAppConfiguration((context, config) =>
 {
     Console.WriteLine(context.HostingEnvironment.EnvironmentName);
     config.AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}", true, true);
-});
+});*/
 
+var environmentName = Environment.GetEnvironmentVariable("ENVIRONMENT_NAME");
 
-var settings = builder.Configuration.GetSection("Settings");
+if (!string.IsNullOrEmpty(environmentName))
+{
+    Console.WriteLine(environmentName);
+    builder.Configuration.AddJsonFile($"Backend/appsettings.{environmentName}.json");
+}
 
-//Console.WriteLine(settings.ToString());
-//builder.Configuration.GetSection("Settings").Bind(new Settings());
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
@@ -24,29 +29,24 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (environmentName == "Local" || environmentName == "Development")
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    Console.WriteLine($"Swagger Docs live at https://localhost:7001/swagger/index.html");
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
-
-//Console.WriteLine($"{app.Environment.EnvironmentName} Writeline");
 
 
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
-
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.MapControllers();
 
 app.MapFallbackToFile("index.html");
 
