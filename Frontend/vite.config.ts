@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react(), mkcert()],
   server: {
     https: true,
+    port: 7002,
   },
   resolve: {
     alias: {
