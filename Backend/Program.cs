@@ -1,10 +1,4 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-/*
-builder.WebHost.ConfigureAppConfiguration((context, config) =>
-{
-    Console.WriteLine(context.HostingEnvironment.EnvironmentName);
-    config.AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}", true, true);
-});*/
 
 var environmentName = Environment.GetEnvironmentVariable("ENVIRONMENT_NAME");
 
