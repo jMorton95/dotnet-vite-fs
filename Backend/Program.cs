@@ -25,6 +25,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+Console.WriteLine($"{app.Environment.EnvironmentName} Writeline");
 
 
 app.UseCors("AllowAll");

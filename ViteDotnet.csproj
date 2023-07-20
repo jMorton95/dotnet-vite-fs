@@ -11,7 +11,7 @@
     <SpaProxyServerUrl>https://localhost:7002</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Configurations>Debug;Release;Production;Development</Configurations>
+    <Configurations>Local;Production;Development</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
