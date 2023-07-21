@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode Local",
-    "build": "tsc && vite build",
+    "build": "npm run lint && tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "Local": "tsc && vite build --mode Local",
-    "Development": "tsc && vite build --mode Development",
-    "Production": "tsc && vite build --mode Production"
+    "Local": "npm run lint && tsc && vite build --mode Local",
+    "Development": "npm run lint && tsc && vite build --mode Development",
+    "Production": "npm run lint && tsc && vite build --mode Production"
   },
   "dependencies": {
     "react": "^18.2.0",

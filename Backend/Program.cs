@@ -1,6 +1,6 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-var environmentName = Environment.GetEnvironmentVariable("ENVIRONMENT_NAME");
+string? environmentName = Environment.GetEnvironmentVariable("ENVIRONMENT_NAME");
 
 if (!string.IsNullOrEmpty(environmentName))
 {
@@ -10,6 +10,7 @@ if (!string.IsNullOrEmpty(environmentName))
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
@@ -23,11 +24,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-
-
-builder.Services.AddControllers();
-
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 if (environmentName == "Local" || environmentName == "Development")
 {
@@ -35,7 +32,6 @@ if (environmentName == "Local" || environmentName == "Development")
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
