@@ -23,7 +23,7 @@ function App() {
       console.log(`DotNet Env: ${data.hostName}`);
     }
 
-    getData();
+    void getData();
   });
 
   return (
